@@ -20,6 +20,21 @@ def get_mtcars_inputs():
             max=35,
             value=[10, 35],
         ),
+        ui.input_slider(
+            "MTCARS_DISP",
+            "Displacement",
+            min=71,
+            max=472,
+            value=[71, 472],
+        ),
+        ui.input_slider(
+            "MTCARS_DRAT",
+            "Rear Axel Ratio",
+            min=2,
+            max=5,
+            value=[2, 5],
+        ),
+
         ui.tags.hr(),
         ui.tags.section(
             ui.h3("MT Cars Table"),

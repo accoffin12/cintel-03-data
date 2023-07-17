@@ -33,9 +33,9 @@ penguins_df = sns.load_dataset("penguins")
 penguins_df.to_excel(data_folder.joinpath("penguins.xlsx"))
 penguins_df.to_csv(data_folder.joinpath("penguins.csv"))
 
-flights_df = sns.load_dataset("flights")
-flights_df.to_excel(data_folder.joinpath("flights.xlsx"))
-flights_df.to_csv(data_folder.joinpath("flights.csv"))
+iris_df = sns.load_dataset("iris")
+iris_df.to_excel(data_folder.joinpath("iris.xlsx"))
+iris_df.to_csv(data_folder.joinpath("iris.csv"))
 
 mtcars_df = pd.read_csv(data_folder.joinpath("mtcars.csv"))
 mtcars_df.to_excel(data_folder.joinpath("mtcars.xlsx"))

@@ -19,12 +19,16 @@ from penguins_server import get_penguins_server_functions
 from penguins_ui_inputs import get_penguins_inputs
 from penguins_ui_outputs import get_penguins_outputs
 
+from iris_server import get_iris_server_functions
+from iris_ui_inputs import get_iris_inputs
+from iris_ui_outputs import get_iris_outputs
+
 from util_logger import setup_logger
 
 logger, logname = setup_logger(__name__)
 
 app_ui = ui.page_navbar(
-    shinyswatch.theme.lumen(),
+    shinyswatch.theme.solar(),
     ui.nav(
         "Home",
         ui.layout_sidebar(
@@ -38,18 +42,27 @@ app_ui = ui.page_navbar(
                     "Enter your favorite language(s)",
                     placeholder="Favorite Programming Language(s)",
                 ),
+                ui.input_text("movie_input", "Enter your favorite movie(s)", placeholder="movies"),
+                ui.input_text(
+                    "snack_input",
+                    "Enter your favorite snack(s)",
+                    placeholder="Favorite Snacks"
+                    ),
                 ui.tags.hr(),
             ),
             ui.panel_main(
-                ui.h2("New Data Exploration Tabs (see above)"),
+                ui.h2("New Data Exploration Tabs"),
                 ui.tags.hr(),
                 ui.tags.ul(
                     ui.tags.li(
-                        "To explore MotorTrend Car dataset, click the 'MT_Cars' tab."
+                        "To explore MotorTrend Car dataset, select the 'MT_Cars' tab."
                     ),
                     ui.tags.li(
-                        "To explore the Penguins Dataset, click the 'Penguins' tab."
+                        "To explore the Penguins dataset, select the 'Penguins' tab."
                     ),
+                    ui.tags.li(
+                        "To explore the Iris dataset, select the 'Iris' tab. "
+                    )
                 ),
                 ui.tags.hr(),
                 ui.h2("Main Panel with Reactive Output"),
@@ -74,12 +87,19 @@ app_ui = ui.page_navbar(
             get_penguins_outputs(),
         ),
     ),
-    ui.nav(ui.a("About", href="https://github.com/denisecase")),
-    ui.nav(ui.a("GitHub", href="https://github.com/denisecase/cintel-03-data")),
-    ui.nav(ui.a("App", href="https://denisecase.shinyapps.io/cintel-03-data/")),
+    ui.nav(
+        "Iris",
+        ui.layout_sidebar(
+            get_iris_inputs(),
+            get_iris_outputs(),
+        ),
+    ),
+    ui.nav(ui.a("About", href="https://github.com/accoffin12")),
+    ui.nav(ui.a("GitHub", href="https://github.com/accoffin12/cintel-03-data")),
+    ui.nav(ui.a("App", href="https://accoffin12.shinyapps.io/cintel-03-data/")),
     ui.nav(ui.a("Examples", href="https://shinylive.io/py/examples/")),
     ui.nav(ui.a("Themes", href="https://bootswatch.com/")),
-    title=ui.h1("Case Dashboard"),
+    title=ui.h1("Coffin Dashboard"),
 )
 
 
@@ -100,9 +120,19 @@ def server(input, output, session):
         count = len(answer)
         language_string = f"You like {answer}. That takes {count} characters"
         return language_string
-
+    
+    @output
+    @render.text
+    def insights_output():
+        answer = input.movie_input()
+        answer2 = input.snack_input()
+        count = len(answer + answer2)
+        movie_string = f"Your favorite movie(s) is/are {answer}, and your favorite snack(s) are {answer2}. That takes {count} characters"
+        return movie_string
+    
     get_mtcars_server_functions(input, output, session)
     get_penguins_server_functions(input, output, session)
+    get_iris_server_functions(input, output, session)
 
 
 app = App(app_ui, server)
