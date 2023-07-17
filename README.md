@@ -1,8 +1,8 @@
 # Continuous Intelligence and Interactive Analytics - Working With Data
 
-- Interactive app: [cintel-03-data](https://denisecase.shinyapps.io/cintel-03-data/) - see MT Cars tab and Penguins tab
-- Repository: [cintel-03-data](https://github.com/denisecase/cintel-03-data)
-- Author: [Denise Case](https://github.com/denisecase)
+- Interactive app: [cintel-03-data](https://accoffin12.shinyapps.io/cintel-03-data/) - see MT Cars tab and Penguins tab
+- Repository: [cintel-03-data](https://github.com/accoffin12?tab=repositories)
+- Author: [Alexandra Coffin](https://github.com/accoffin12)
 
 This time, we add data. 
 Two very common types of data are Excel data and CSV (comma-separated values) data.
